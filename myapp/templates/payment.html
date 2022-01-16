@@ -1,0 +1,31 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Chi tiết {% endblock %}
+
+
+{% block content %}
+
+<div class="container font-weight-bold text-center" style="margin-bottom: 60px">
+    <h1 class="text-center text-danger" style="padding: 20px 0 60px">THANH TOÁN TIỀN KHÁM</h1>
+    <table class="table table-bordered rounded table-hover text-center">
+        <tr>
+            <th>Id</th>
+            <th>Họ tên</th>
+            <th>ngày khám</th>
+            <th>Tiền khám</th>
+            <th>Tiền thuốc</th>
+            <th>Thành tiền</th>
+        </tr>
+    </table>
+
+
+    <br>
+    <br>
+    <div class="text-center">
+        <input type="button" value="Thanh toán" class="btn btn-success" onclick="pay()" />
+    </div>
+
+</div>
+
+
+{% endblock %}
