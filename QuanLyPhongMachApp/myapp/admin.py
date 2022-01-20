@@ -1,10 +1,23 @@
 from myapp import app,db
 from myapp.models import *
-from flask_admin import Admin
+from flask_admin import Admin,BaseView,expose,AdminIndexView
 from flask_admin.contrib.sqla import ModelView
+from flask import redirect,request
+from flask_login import logout_user,current_user
 import myapp
 admin = Admin(app=app, name='Quản trị phòng mạch ',template_mode='bootstrap4')
 
+class AuthenticatedModelView(ModelView):
+    def is_accessible(self):
+        return current_user.is_authenticated and current_user.user_role == UserRole.ADMIN
+class Logoutview(BaseView):
+    @expose('/')
+    def index(self):
+        logout_user()
+        return redirect("/admin")
+
+    def is_accessible(self):
+        return current_user.is_authenticated and current_user.user_role == UserRole.ADMIN
 class ThuocView(ModelView):
     column_display_pk = True
     can_view_details = True
@@ -60,11 +73,12 @@ class ScheduleView(ModelView):
     }
 
 
-admin.add_view(ModelView(Category,db.session))
-admin.add_view(ThuocView(Thuoc,db.session, name='Thuốc'))
-admin.add_view(UserView(User,db.session))
-admin.add_view(BacsiView(Bacsi,db.session, name='Bác sĩ'))
-admin.add_view(ModelView(Khachhang,db.session,name='Khách hàng'))
-admin.add_view(ScheduleView(Schedule,db.session, name='Lịch khám'))
-admin.add_view(ModelView(Appointment,db.session, name='Appointment'))
-admin.add_view(ModelView(AppointmentDetail,db.session,name='Chi tiết đơn hàng'))
+admin.add_view(AuthenticatedModelView(Category,db.session))
+admin.add_view(AuthenticatedModelView(Thuoc,db.session, name='Thuốc'))
+admin.add_view(AuthenticatedModelView(User,db.session))
+admin.add_view(AuthenticatedModelView(Bacsi,db.session, name='Bác sĩ'))
+admin.add_view(AuthenticatedModelView(Khachhang,db.session,name='Khách hàng'))
+admin.add_view(AuthenticatedModelView(Schedule,db.session, name='Lịch khám'))
+admin.add_view(AuthenticatedModelView(Appointment,db.session, name='Appointment'))
+admin.add_view(AuthenticatedModelView(AppointmentDetail,db.session,name='Chi tiết đơn hàng'))
+admin.add_view(Logoutview(name='Đăng xuất'))

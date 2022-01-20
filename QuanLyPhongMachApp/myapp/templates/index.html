@@ -1,10 +1,91 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>Hello</h1>
-</body>
-</html>
+{% extends 'layout/base.html' %}
+
+{% block title %}Trang chủ {% endblock %}
+
+
+{% block content %}
+<div class="container">
+
+  <div style="display: flex; margin-bottom: 60px;">
+    <div class="height">
+      <img style="height: 300px ;width: 2000px;"
+        src="https://bacsigiadinhphuduc.com/wp-content/uploads/2020/03/cac-chuyen-khoa.jpg">
+    </div>
+
+    <div class="">
+      <h3 style="text-align: center; margin-bottom: 20px; font-size: 40px; color:darkorange">Bác Sĩ Gia Đình – Hẹn đến nhà</h3>
+      <span style="letter-spacing: 2px;">Trên thế giới, bác sĩ gia đình là mô hình phổ biến và được áp dụng rất thành công bởi tính tiện ích. Ở
+        Việt Nam, mô hình bác sĩ
+        gia đình tuy khá mới mẻ nhưng càng ngày càng có tín hiệu phát triển và mở rộng. Một trong những
+        hoạt động đặc trưng và mang tính chất đáp ứng
+        cao của BSGĐ đó là việc Bác sĩ đến nhà để thăm khám.</span>
+    </div>
+  </div>
+
+  <h2 style="text-align: center; color:darkorange">ĐẶT LỊCH KHÁM</h2>
+
+  <br>
+  <div style="background-color: cadetblue; border-radius: 3px; padding-top: 20px; margin-bottom: 60px;">
+      <div class="row font-weight-bold" style="margin:0 100px">
+          <div class="col-md-6">
+              <div class="form-group">
+                  <label>Họ tên:</label>
+                  <input type="text"
+                         class="form-control"
+                         name="guest"
+                         id="guest" required>
+              </div>
+
+              <div class="form-group">
+                <label>Giới tính:</label>
+                <input type="text"
+                       class="form-control"
+                       name="guest"
+                       id="guest" required>
+            </div>
+
+              <div class="form-group">
+                  <label>Số điện thoại:</label>
+                  <input type="text"
+                         class="form-control"
+                         name="phone"
+                         id="phone" required>
+              </div>
+          </div>
+          <div class="col-md-6">
+              <div class="form-group">
+                  <label for="in_date">Ngày khám</label>
+                  <input class="form-control"
+                         type="date"
+                         id="in_date"
+                         name="in_date" required>
+              </div>
+
+              <div class="form-group">
+                <label>Năm sinh:</label>
+                <input type="text"
+                       class="form-control"
+                       name="phone"
+                       id="phone" required>
+            </div>
+
+            <div class="form-group">
+              <label>Địa chỉ:</label>
+              <input type="text"
+                     class="form-control"
+                     name="phone"
+                     id="phone" required>
+          </div>
+
+          </div>
+
+
+      </div>
+      <div class="text-center" style="padding-bottom: 25px; ">
+            <input class=" btn btn-success" type="submit" value="Đặt" />
+      </div>
+  </div>
+
+
+</div>
+{% endblock %}

@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship
 from myapp import db
 from datetime import datetime
 from enum import Enum as UserEnum
+from flask_login import UserMixin
 
 class BaseModel(db.Model):
     __abstract__ = True
@@ -17,7 +18,7 @@ class UserRole(UserEnum):
     def __str__(self):
         return self.name
 
-class User(db.Model):
+class User(db.Model,UserMixin):
     __tablename__ = 'user'
     id = Column(Integer,primary_key=True,autoincrement=True)
     name = Column(String(50), nullable=False)
