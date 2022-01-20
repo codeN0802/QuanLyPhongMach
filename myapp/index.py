@@ -24,6 +24,10 @@ def user_login():
 def payment():
     return render_template('payment.html',)
 
+@app.route("/detail")
+def detail():
+    return render_template("detaildoctor.html")
+
 
 
 

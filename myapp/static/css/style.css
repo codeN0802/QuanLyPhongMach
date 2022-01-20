@@ -39,7 +39,7 @@ picture {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-}
+  }
 }
 * {
   padding: 0;
@@ -152,5 +152,43 @@ html {
   justify-content: center;
 }
 
-  
-  
+.time {
+  background-color: #eee;
+  padding: 10px;
+  transition: transform 450ms;
+}
+.time:hover {
+  cursor: pointer;
+  transform: scale(1.08);
+}
+.time2 {
+  background-color: #fdba74;
+  padding: 10px;
+  transition: transform 450ms;
+}
+.time2:hover {
+  cursor: pointer;
+  transform: scale(1.08);
+}
+.info {
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 60px;
+  padding: 40px;
+  border-radius: 3px;
+}
+.more {
+  margin-top: 12px;
+  text-align: center;
+  display: block;
+  color:#1ac7b6;
+  transition: transform 450ms;
+}
+.more:hover {
+  cursor: pointer;
+  transform: scale(1.08);
+
+}
+
