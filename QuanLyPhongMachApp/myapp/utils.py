@@ -33,3 +33,12 @@ def check_adminlogin(username,pasword):
                                  User.pasword.__eq__(pasword)).first()
 def get_user_by_id(user_id):
     return User.query.get(user_id)
+
+def read_bacsis():
+    return Bacsi.query.all()
+
+def read_giokham(bs_id=  None):
+    giokham = Schedule.query.filter(Schedule.active.__eq__(True))
+    if bs_id:
+        giokham = giokham.filter(Schedule.bacsi_id.__eq__(int(bs_id)))
+    return giokham.all()

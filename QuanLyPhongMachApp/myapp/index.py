@@ -7,7 +7,11 @@ from flask_login import login_user,logout_user, login_required,current_user
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+
+    bacsis = utils.read_bacsis()
+    bs_id = request.args.get("bacsi_id")
+    giokham = utils.read_giokham(bs_id=bs_id)
+    return render_template("index.html",bacsis=bacsis,giokham=giokham)
 
 @app.route("/register", methods=['get','post'])
 def user_register():
@@ -78,6 +82,9 @@ def admin_login():
         else:
             err_msg ="Vui lòng kiểm tra lại Username hoặc Password"
             return  abort(Response(err_msg))
+
+
+
 
 @login.user_loader
 def user_load(user_id):
