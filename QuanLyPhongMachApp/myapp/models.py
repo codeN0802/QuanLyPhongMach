@@ -32,6 +32,7 @@ class User(db.Model,UserMixin):
     user_role = Column(Enum(UserRole), default=UserRole.KHACHHANG)
     bacsi_profiles = relationship('Bacsi', uselist=False, backref='user')
     khachhang_profiles = relationship('Khachhang', uselist=False, backref='user')
+    appoints = relationship('Appointment', backref='user', lazy=True)
 
     def __str__(self):
         return self.name
@@ -45,13 +46,17 @@ class Bacsi(db.Model):
     schedules = relationship('Schedule', backref='bacsi',lazy=True)
     appoints = relationship('Appointment',backref='bacsi',lazy=True)
 
+    def __str__(self):
+        return self.user.name
+
+
 
 
 class Khachhang(db.Model):
     __tablename__ = 'khachhang'
     id = Column(Integer,primary_key=True,autoincrement=True)
     user_id = Column(Integer,ForeignKey('user.id'),unique=True)
-    appoints = relationship('Appointment', backref='khachhang', lazy=True)
+    # appoints = relationship('Appointment', backref='khachhang', lazy=True)
 
 class Schedule(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -96,10 +101,10 @@ class Appointment(db.Model):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     created_date = Column(DateTime, default=datetime.now())
-    active = Column(Boolean)
-    is_thanhtoan = Column(Boolean)
+    active = Column(Boolean,default=True)
+    is_thanhtoan = Column(Boolean,default=False)
     giodat = Column(DateTime)
-    khachhang_id = Column(Integer,ForeignKey('khachhang.id'),nullable=False)
+    user_id = Column(Integer,ForeignKey('user.id'),nullable=False)
     bacsi_id = Column(Integer,ForeignKey('bacsi.id'),nullable=False)
     details = relationship('AppointmentDetail',backref='appointment',lazy=True)
 

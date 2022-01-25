@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import cloudinary
 from flask_login import LoginManager
+from flask_mail import Mail, Message
 app = Flask(__name__)
 app.secret_key = 'IOU48FGSDFT345345@!#@$whu' #crud du lieu
 
@@ -18,3 +19,13 @@ cloudinary.config(
 )
 
 login = LoginManager(app=app)
+
+app.config['PAGE_SIZE'] = 5
+
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'nghinguyen08022000@gmail.com'
+app.config['MAIL_PASSWORD'] = 'Nghi0802'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)

@@ -4,28 +4,53 @@
 
 
 {% block content %}
-
+{% if err_msg %}
+        <div class="alert alert-danger">
+           <h5> {{err_msg}}</h5>
+        </div>
+{% endif %}
 <div class="container font-weight-bold text-center" style="margin-bottom: 60px">
-    <h1 class="text-center text-danger" style="padding: 20px 0 60px">THANH TOÁN TIỀN KHÁM</h1>
-    <table class="table table-bordered rounded table-hover text-center">
+    <h1 class="text-center text-danger" style="padding: 20px 0 60px">Đặt lịch khám bệnh</h1>
+    <form method="post" action="{{url_for('bookingappointment',schedule_id=booking.id)}}"  enctype="multipart/form-data">
+        <table class="table table-bordered rounded table-hover text-center">
         <tr>
-            <th>Id</th>
-            <th>Họ tên</th>
-            <th>ngày khám</th>
+            <th>Họ tên người khám</th>
+            <th>Họ tên bác sĩ</th>
+            <th>Ngày khám</th>
+            <th>Giờ khám</th>
             <th>Tiền khám</th>
-            <th>Tiền thuốc</th>
-            <th>Thành tiền</th>
+        </tr>
+        <tr>
+            <td>{{current_user.name}}</td>
+            <td>{{booking.bacsi}}</td>
+            <td>{{booking.ngaykham}}</td>
+            <td >{{booking.giobatdau.strftime('%H:%M')}}</td>
+            <td>100.000 VND</td>
         </tr>
     </table>
 
 
     <br>
     <br>
+    {% if current_user.is_authenticated %}
     <div class="text-center">
-        <input type="button" value="Thanh toán" class="btn btn-success" onclick="pay()" />
+         <button class="form-submit btn-primary" onclick="clicked(event)">Booking</button>
     </div>
+    {% else %}
+    <a href="{{ url_for('user_login')}}" class="text-danger">Đăng nhập để đặt lịch....</a>
+    <br>
+    {% endif %}
+    </form>
+
 
 </div>
 
-
+<script>
+function clicked(e)
+{
+    if(!confirm('Bạn có chắc chắn booking ?')) {
+        e.preventDefault();
+    }
+}
+</script>
 {% endblock %}
